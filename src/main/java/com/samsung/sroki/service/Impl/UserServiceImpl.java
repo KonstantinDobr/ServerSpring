@@ -20,6 +20,12 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final RoomDao roomDao;
 
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+        this.roomDao = roomDao;
+    }
+
 
     @Override
     public User add(User user) {
