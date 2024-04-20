@@ -5,19 +5,18 @@ import com.samsung.sroki.domain.Product;
 import com.samsung.sroki.domain.Room;
 import com.samsung.sroki.domain.User;
 import com.samsung.sroki.service.RoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
     private final RoomDao roomDao;
-
-    @Autowired
-    public RoomServiceImpl(RoomDao roomDao) {
-        this.roomDao = roomDao;
-    }
 
     @Override
     public Room find(long id) {
