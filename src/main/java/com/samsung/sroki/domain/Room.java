@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -13,14 +14,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-public class User {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "deviceId")
-    private String deviceId;
+    @Column(name = "userList")
+    private ArrayList<Long> userList;
 
-    @Column(name = "roomId")
-    private long roomId;
+    @Column(name = "productList")
+    private ArrayList<Product> productList;
 }

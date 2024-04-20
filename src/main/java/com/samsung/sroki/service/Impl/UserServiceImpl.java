@@ -1,8 +1,11 @@
-package com.samsung.sroki.service;
+package com.samsung.sroki.service.Impl;
 
+import com.samsung.sroki.dao.RoomDao;
 import com.samsung.sroki.dao.UserDao;
 import com.samsung.sroki.domain.Product;
+import com.samsung.sroki.domain.Room;
 import com.samsung.sroki.domain.User;
+import com.samsung.sroki.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final RoomDao roomDao;
+
 
     @Override
     public User add(User user) {
@@ -22,20 +27,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(long id, User user) {
-        Optional<User> userOptional = userDao.findById(id);
-        if (!userOptional.isPresent()) throw new RuntimeException("User with ID " + id + " not found");
-
-        User updateUser = userOptional.get();
-        updateUser.setProducts(user.getProducts());
-        return updateUser;
-    }
-
-    @Override
     public ArrayList<Product> getProducts(long id) {
         Optional<User> userOptional = userDao.findById(id);
         if (!userOptional.isPresent()) throw new RuntimeException("User with ID " + id + " not found");
 
-        return userOptional.get().getProducts();
+        Optional<Room> roomOptional = roomDao.findById(userOptional.get().getId());
+        if (!roomOptional.isPresent()) throw new RuntimeException("Room with ID " + id + " not found");
+
+        return roomOptional.get().getProductList();
     }
 }
