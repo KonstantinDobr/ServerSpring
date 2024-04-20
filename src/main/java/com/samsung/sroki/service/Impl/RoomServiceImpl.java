@@ -65,7 +65,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public ArrayList<Product> getProducts(long id) {
+    public ArrayList<Long> getProducts(long id) {
         Optional<Room> roomOptional = roomDao.findById(id);
         if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
 

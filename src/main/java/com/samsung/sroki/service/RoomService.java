@@ -18,5 +18,5 @@ public interface RoomService {
 
     Room deleteUser(long id, long userId);
 
-    ArrayList<Product> getProducts(long id);
+    ArrayList<Long> getProducts(long id);
 }

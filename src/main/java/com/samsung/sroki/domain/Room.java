@@ -23,5 +23,5 @@ public class Room {
     private ArrayList<Long> userList;
 
     @Column(name = "productList")
-    private ArrayList<Product> productList;
+    private ArrayList<Long> productList;
 }

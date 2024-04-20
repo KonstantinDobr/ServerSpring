@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<Product> getProducts(long id) {
+    public ArrayList<Long> getProducts(long id) {
         Optional<User> userOptional = userDao.findById(id);
         if (!userOptional.isPresent()) throw new RuntimeException("User with ID " + id + " not found");
 

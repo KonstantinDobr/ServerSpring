@@ -27,6 +27,6 @@ public class RoomController {
     public Room delete(@RequestBody long id, long userId) {return roomService.deleteUser(id, userId);}
 
     @GetMapping("/room/get_products/{id}")
-    public ArrayList<Product> getProducts(@PathVariable long id) {return roomService.getProducts(id);}
+    public ArrayList<Long> getProducts(@PathVariable long id) {return roomService.getProducts(id);}
 
 }

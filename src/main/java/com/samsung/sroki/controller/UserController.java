@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ArrayList<Product> getProducts(@PathVariable long id) {
+    public ArrayList<Long> getProducts(@PathVariable long id) {
         return userService.getProducts(id);
     }
 }
