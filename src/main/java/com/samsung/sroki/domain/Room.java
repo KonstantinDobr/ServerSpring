@@ -1,11 +1,11 @@
 package com.samsung.sroki.domain;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Data
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "room")
+@Table(name = "user")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(name="userList")
-    ArrayList<Long> userList;
+    @Column(name = "userList")
+    private ArrayList<Long> userList;
 
-    @Column(name="productList")
-    ArrayList<Product> productList;
+    @Column(name = "productList")
+    private ArrayList<Product> productList;
 }

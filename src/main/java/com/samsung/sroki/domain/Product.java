@@ -1,14 +1,17 @@
 package com.samsung.sroki.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
+import javax.persistence.Entity;
 
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Product {
     private String name;
     private int freshnessId;

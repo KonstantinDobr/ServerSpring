@@ -19,11 +19,6 @@ public class UserController {
         return userService.add(user);
     }
 
-    @PutMapping("/user/{id}")
-    public User update(@PathVariable long id, @RequestBody User user) {
-        return userService.update(id, user);
-    }
-
     @GetMapping("/user/{id}")
     public ArrayList<Product> getProducts(@PathVariable long id) {
         return userService.getProducts(id);

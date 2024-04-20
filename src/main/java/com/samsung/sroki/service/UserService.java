@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface UserService {
     User add(User user);
+
     ArrayList<Product> getProducts(long id);
 }
