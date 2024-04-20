@@ -8,8 +8,5 @@ import java.util.List;
 
 public interface UserService {
     User add(User user);
-
-    User update(long id, User user);
-
     ArrayList<Product> getProducts(long id);
 }
