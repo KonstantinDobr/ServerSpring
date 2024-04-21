@@ -11,18 +11,23 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @PostMapping("/product")
-    public Product add(@RequestBody Product product) {
-        return productService.add(product);
+    @GetMapping("/product/get/{id}")
+    public Product get(long id) {
+        return productService.get(id);
     }
 
-    @DeleteMapping("/product/{id}")
+    @PostMapping("/product/save")
+    public Product add(@RequestBody Product product) {
+        return productService.save(product);
+    }
+
+    @DeleteMapping("/product/delete/{id}")
     public void delete(@PathVariable long id) {
         productService.delete(id);
     }
 
-    @PostMapping("/product/{id}")
-    public Product update(@PathVariable long id, @RequestBody Product product) {
-        return productService.update(id, product);
+    @PostMapping("/product/update/")
+    public Product update(@RequestBody Product product) {
+        return productService.update(product);
     }
 }

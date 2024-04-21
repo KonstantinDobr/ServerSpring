@@ -1,22 +1,20 @@
 package com.samsung.sroki.service;
 
-import com.samsung.sroki.domain.Product;
 import com.samsung.sroki.domain.Room;
-import com.samsung.sroki.domain.User;
 
 import java.util.ArrayList;
 
 public interface RoomService {
 
-    Room find(long id);
+    Room find(String id);
 
-    Room add(Room room);
+    Room save(Room room);
 
-    ArrayList<Long> getUsers(long id);
+    ArrayList<Long> getUsers(String id);
 
-    Room addUser(long id, long userId);
+    Room addUser(String id, long userId);
 
-    Room deleteUser(long id, long userId);
+    Room deleteUser(String id, long userId);
 
-    ArrayList<Long> getProducts(long id);
+    ArrayList<Long> getProducts(String id);
 }

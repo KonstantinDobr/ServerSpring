@@ -1,6 +1,5 @@
 package com.samsung.sroki.controller;
 
-import com.samsung.sroki.domain.Product;
 import com.samsung.sroki.domain.Room;
 import com.samsung.sroki.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -14,19 +13,35 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping("/room")
-    public Room add(@RequestBody Room room) {return roomService.add(room);}
+    @GetMapping("/room/get/{id}")
+    public Room get(String id) {
+        return roomService.find(id);
+    }
 
-    @GetMapping("/room/{id}")
-    public ArrayList<Long> getUsers(@PathVariable long id) {return roomService.getUsers(id);}
+    @PostMapping("/room/save")
+    public Room save(@RequestBody Room room) {
+        System.out.println("Save");
+        return roomService.save(room);
+    }
 
-    @PostMapping("/room/add_user")
-    public Room add(@RequestBody long id, long userId) {return roomService.addUser(id, userId);}
+    @GetMapping("/room/users/{login}")
+    public ArrayList<Long> getUsers(@PathVariable String login) {
+        return roomService.getUsers(login);
+    }
+
+    @PostMapping("/room/save_user/{userId}")
+    public Room add(@RequestBody String id, @PathVariable long userId) {
+        return roomService.addUser(id, userId);
+    }
 
     @PostMapping("/room/delete_user")
-    public Room delete(@RequestBody long id, long userId) {return roomService.deleteUser(id, userId);}
+    public Room delete(@RequestBody String id, long userId) {
+        return roomService.deleteUser(id, userId);
+    }
 
-    @GetMapping("/room/get_products/{id}")
-    public ArrayList<Long> getProducts(@PathVariable long id) {return roomService.getProducts(id);}
+    @GetMapping("/room/products/{login}")
+    public ArrayList<Long> getProducts(@PathVariable String login) {
+        return roomService.getProducts(login);
+    }
 
 }

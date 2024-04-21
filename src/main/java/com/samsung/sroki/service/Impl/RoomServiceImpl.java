@@ -8,6 +8,7 @@ import com.samsung.sroki.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.schema.Example;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,31 +20,27 @@ public class RoomServiceImpl implements RoomService {
     private final RoomDao roomDao;
 
     @Override
-    public Room find(long id) {
-        Optional<Room> roomOptional = roomDao.findById(id);
-        if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
-        return roomOptional.get();
+    public Room find(String login) {
+        Room room = roomDao.findByLogin(login);
+        if (room == null) throw new RuntimeException("Room with login " + login + " not found");
+        return room;
     }
 
     @Override
-    public Room add(Room room) {
+    public Room save(Room room) {
         return roomDao.save(room);
     }
 
     @Override
-    public ArrayList<Long> getUsers(long id) {
-        Optional<Room> roomOptional = roomDao.findById(id);
-        if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
+    public ArrayList<Long> getUsers(String login) {
+        Room room = find(login);
 
-        return roomOptional.get().getUserList();
+        return room.getUserList();
     }
 
     @Override
-    public Room addUser(long id, long userId) {
-        Optional<Room> roomOptional = roomDao.findById(id);
-        if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
-
-        Room room = roomOptional.get();
+    public Room addUser(String login, long userId) {
+        Room room = find(login);
         ArrayList<Long> userList = room.getUserList();
         userList.add(userId);
         room.setUserList(userList);
@@ -52,11 +49,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room deleteUser(long id, long userId) {
-        Optional<Room> roomOptional = roomDao.findById(id);
-        if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
-
-        Room room = roomOptional.get();
+    public Room deleteUser(String login, long userId) {
+        Room room = find(login);
         ArrayList<Long> userList = room.getUserList();
         userList.remove(userId);
         room.setUserList(userList);
@@ -65,10 +59,10 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public ArrayList<Long> getProducts(long id) {
-        Optional<Room> roomOptional = roomDao.findById(id);
-        if (!roomOptional.isPresent()) throw new RuntimeException("Room with id " + id + " not found");
+    public ArrayList<Long> getProducts(String login) {
+        Room room = find(login);
+        if (room == null) throw new RuntimeException("Room with id " + login + " not found");
 
-        return roomOptional.get().getProductList();
+        return room.getProductList();
     }
 }

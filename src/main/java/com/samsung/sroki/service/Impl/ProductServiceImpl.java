@@ -15,7 +15,12 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
 
     @Override
-    public Product add(Product product) {
+    public Product get(long id) {
+        return productDao.findById(id).get();
+    }
+
+    @Override
+    public Product save(Product product) {
         return productDao.save(product);
     }
 
@@ -28,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product update(long id, Product product) {
-        Optional<Product> optionalProduct = productDao.findById(id);
+    public Product update(Product product) {
+        Optional<Product> optionalProduct = productDao.findById(product.getId());
         if (!optionalProduct.isPresent()) throw new RuntimeException();
 
         Product updatedProduct = optionalProduct.get();

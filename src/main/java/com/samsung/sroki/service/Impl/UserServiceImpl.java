@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
     private final RoomDao roomDao;
 
     @Override
-    public User add(User user) {
+    public User save(User user) {
+        System.out.println("User save");
         return userDao.save(user);
     }
 
@@ -30,9 +31,14 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userDao.findById(id);
         if (!userOptional.isPresent()) throw new RuntimeException("User with ID " + id + " not found");
 
-        Optional<Room> roomOptional = roomDao.findById(userOptional.get().getId());
+        Optional<Room> roomOptional = Optional.ofNullable(roomDao.findByLogin(String.valueOf(userOptional.get().getRoomId())));
         if (!roomOptional.isPresent()) throw new RuntimeException("Room with ID " + id + " not found");
 
         return roomOptional.get().getProductList();
+    }
+
+    @Override
+    public boolean check(long id) {
+        return  !userDao.findById(id).isEmpty();
     }
 }
